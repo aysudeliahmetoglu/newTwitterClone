@@ -6,8 +6,22 @@
             <div class="column is-12">
                 <div class="wrapper-form">
                     <form v-on:submit.prevent="submitOink()">
-                        
+                        <div class="field">
+                            <div class="control">
+                                <textarea class="textarea" v-model="body" placeholder="What are you oinking?"></textarea>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="control">
+                                <button class="button is-success"></button>
+                            </div>
+                        </div>
                     </form>
+                </div>
+                <div class="wrapper-oinks">
+                    <div class="oink" v-for="oink in oinks">
+                        <p [[ oink.body ]]></p>
+                    </div>
                 </div>
             </div>
         </div>
