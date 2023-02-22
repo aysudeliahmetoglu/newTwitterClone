@@ -4,9 +4,35 @@
     <div class="container">
         <div class="columns">
             <div class="column is-12">
-                <h1 class="title">My feed</h1>
+                <div class="wrapper-form">
+                    <form v-on:submit.prevent="submitOink()">
+                        
+                    </form>
+                </div>
             </div>
         </div>
     </div>
 
 {% endblock %}    
+
+{% block script %}
+<script>
+    new Vue({
+        el:'#feedapp',
+        delimiters: ['[[' , ']]'],
+        data(){
+            return{
+                oink: [],
+                body: ''
+            }
+        },
+        methods:{
+            submitOin(){
+                console.log('submitOink');
+            }
+        }
+    }
+    )
+</script>
+
+{% endblock %}
