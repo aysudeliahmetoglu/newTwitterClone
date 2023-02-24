@@ -13,14 +13,17 @@
                         </div>
                         <div class="field">
                             <div class="control">
-                                <button class="button is-success"></button>
+                                <button class="button is-success">Submit</button>
                             </div>
                         </div>
                     </form>
                 </div>
+                
                 <div class="wrapper-oinks">
                     <div class="oink" v-for="oink in oinks">
-                        <p [[ oink.body ]]></p>
+                        <p class="name">[[ oink.oinker ]]</p>
+                        <p>[[ oink.body ]]</p>
+                        <p class="info">[[ oink.created_at ]]</p>
                     </div>
                 </div>
             </div>
@@ -37,11 +40,13 @@
         data(){
             return{
                 oink: [],
-                body: ''
+                body: '',
+                oinker : '{{ reuqest.user.username }}',
+                created_at : 'Now'
             }
         },
         methods:{
-            submitOin(){
+            submitOink(){
                 console.log('submitOink');
             }
         }
