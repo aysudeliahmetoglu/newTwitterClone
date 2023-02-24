@@ -18,7 +18,7 @@
                         </div>
                     </form>
                 </div>
-                
+
                 <div class="wrapper-oinks">
                     <div class="oink" v-for="oink in oinks">
                         <p class="name">[[ oink.oinker ]]</p>
@@ -48,6 +48,11 @@
         methods:{
             submitOink(){
                 console.log('submitOink');
+                if(this.body.length > 0){
+                    var oink = {
+                        'body':this.body
+                    }
+                }
             }
         }
     }
