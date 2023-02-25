@@ -19,6 +19,8 @@ from django.contrib.auth  import  views
 
 from apps.core.views import frontpage,signup
 from apps.feed.views import feed
+
+from apps.feed.api import api_add_oink
 urlpatterns = [
     #
     #
@@ -32,6 +34,12 @@ urlpatterns = [
     #
     #
     path('feed/',feed,name='feed'),
+    #
+    # API
+
+    path('api/add_oink/',api_add_oink,name='api_add_oink'),
+
+
     
 
     #
