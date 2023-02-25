@@ -1,7 +1,7 @@
 {% extends 'core/base.html' %}
 
 {% block content %}
-    <div class="container">
+    <div class="container" id="feedapp">
         <div class="columns">
             <div class="column is-12">
                 <div class="wrapper-form">
@@ -38,8 +38,8 @@
         el:'#feedapp',
         delimiters: ['[[' , ']]'],
         data(){
-            return{
-                oink: [],
+            return {
+                oinks: [ ],
                 body: '',
                 oinker : '{{ reuqest.user.username }}',
                 created_at : 'Now'
@@ -50,9 +50,16 @@
                 console.log('submitOink');
                 if(this.body.length > 0){
                     var oink = {
-                        'body':this.body
-                    }
+                        'body':this.body,
+                        'oinker':this.oinker,
+                        'created_at': this.created_at
+
+                    };
+                    this.oinks.unshift(oink);
+                    // send to backend
+
                 }
+                this.body = '';
             }
         }
     }
