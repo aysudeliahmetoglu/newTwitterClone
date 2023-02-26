@@ -18,7 +18,7 @@ from django.urls import path
 from django.contrib.auth  import  views
 
 from apps.core.views import frontpage,signup
-from apps.feed.views import feed
+from apps.feed.views import feed,search
 
 from apps.feed.api import api_add_oink
 urlpatterns = [
@@ -34,6 +34,8 @@ urlpatterns = [
     #
     #
     path('feed/',feed,name='feed'),
+    path('search/',search,name='search'),
+
     #
     # API
 

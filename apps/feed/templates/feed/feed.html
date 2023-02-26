@@ -1,5 +1,7 @@
 {% extends 'core/base.html' %}
 
+{% load humanize %}
+
 {% block content %}
     <div class="container" id="feedapp">
         <div class="columns">
@@ -24,7 +26,7 @@
                         <div class="oink">
                             <p class="name">{{ oink.created_by.username }}</p>
                             <p>{{ oink.body }}</p>
-                            <p class="info">{{ oink.created_at }}</p>
+                            <p class="info">{{ oink.created_at|naturaltime }}</p>
                         </div>
                     {% endfor %}    
                     <div class="oink" v-for="oink in oinks">
