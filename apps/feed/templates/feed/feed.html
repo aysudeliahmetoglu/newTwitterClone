@@ -20,6 +20,13 @@
                 </div>
 
                 <div class="wrapper-oinks">
+                    {% for oink in oinks %}
+                        <div class="oink">
+                            <p class="name">{{ oink.created_by.username }}</p>
+                            <p>{{ oink.body }}</p>
+                            <p class="info">{{ oink.created_at }}</p>
+                        </div>
+                    {% endfor %}    
                     <div class="oink" v-for="oink in oinks">
                         <p class="name">[[ oink.oinker ]]</p>
                         <p>[[ oink.body ]]</p>
