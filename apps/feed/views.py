@@ -28,3 +28,5 @@ def search(request):
         'query':query,
         'oinkers':oinkers
     }
+
+    return render (request,'feed/search.html',context)
