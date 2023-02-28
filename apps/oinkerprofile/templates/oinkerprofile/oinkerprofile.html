@@ -1,0 +1,34 @@
+{% extends 'core/base.html' %}
+
+{% load humanize %}
+
+{% block content %}
+    <div class="container">
+        <div class="columns">
+            <div class="column is-12">
+                <h1 class="title">{{ user.username }}</h1>
+                <p>Followers: {{ user.oinkerprofile.followed_by.count }}</p>
+                <p>Follows: {{ user.oinkerprofile.follows.count }}</p>
+            
+                {% if user != request.user %}
+                    <a href="{% url 'follow_oinker' user.username %}" class="button is-success">Follow</a>
+            </div>
+        </div>
+
+        <div class="columns">
+            <div class="column is-8">
+                <div class="wrapper-oinks">
+                    {% for oink in user.oinks.all %}
+                      <div class="oink">
+                        <p class="name">{{ oink.created_by.username }}</p>
+                        <p>{{ oink.body }}</p>
+                        <p class="info">{{ oink.created_at|naturaltime }}</p>
+                    </div>
+                    {% endfor %}
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

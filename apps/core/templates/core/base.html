@@ -36,6 +36,7 @@
                 {% if request.user.is_authenticated %}
                     <a href="{% url 'search' %}" class="navbar-item">Search</a>
                     <a href="{% url 'feed' %}" class="navbar-item">Feed</a>
+                    <a href="{% url 'oinkerprofile' request.user.username %}" class="navbar-item">Profile</a>
                 {% endif %}
                 <div class="navbar-item">
                     <div class="buttons">
