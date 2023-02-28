@@ -11,6 +11,7 @@ def oinkerprofile(request,username):
 
     return render(request,'oinkerprofile/oinkerprofile.html',context)
 
+@login_required
 def follow_oinker(request,username):
     user = get_object_or_404(User,username=username)
 

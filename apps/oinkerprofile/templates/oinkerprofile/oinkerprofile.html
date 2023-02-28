@@ -12,7 +12,8 @@
             
                 {% if user != request.user %}
                     <a href="{% url 'follow_oinker' user.username %}" class="button is-success">Follow</a>
-            </div>
+                {% endif %}
+                </div>
         </div>
 
         <div class="columns">
