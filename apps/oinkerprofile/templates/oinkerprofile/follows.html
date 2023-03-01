@@ -6,9 +6,9 @@
     <div class="container">
         <div class="columns">
             <div class="column is-12">
-                <h1 class="title">Followers - {{ user.username }}</h1>
+                <h1 class="title">Follows - {{ user.username }}</h1>
                 
-                <p>Num: {{ user.oinkerprofile.followed_by.count }}</p>
+                <p>Num: {{ user.oinkerprofile.follows.count }}</p>
 
             </div>      
         </div>
@@ -16,13 +16,13 @@
 
     <div class="columns">
         <div class="columns is-8">
-            {% for oinker in user.oinkerprofile.followed_by.all %}
+            {% for oinker in user.oinkerprofile.follows.all %}
                 <p><a href="{% url 'oinkerprofile' oinker.user.username %}">{{ oinker.user.username }}</a></p>
             {% empty %}
                 {% if  request.user == user %}
-                    <p>Sorry, you don't have any followers!</p>
+                    <p>You don't follow anyone!</p>
                 {% else %}
-                    <p>{{ user.username }} doesn't have any followers!</p>          
+                    <p>{{ user.username }} isn't following anyone!</p>          
                 {% endif %}
             {% endfor %}
 

@@ -30,7 +30,7 @@
                 
                 <div class="search-results">
                     {% for oinker in oinkers %}
-                         <p>{{ oinker.username }}</p>
+                         <p><a href="{% url 'oinkerprofile' oinker.username %}">{{ oinker.username }}</a></p>
                     {% endfor %}     
 
                 </div>

@@ -35,3 +35,9 @@ def followers(request,username):
     return render(request,'oinkerprofile/followers.html',{'user':user})
 
 
+def follows(request,username):
+    user = get_object_or_404(User,username=username)
+
+    return render(request,'oinkerprofile/follows.html',{'user':user})
+
+
