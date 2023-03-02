@@ -13,13 +13,15 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.conf import settings
+from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path
 from django.contrib.auth  import  views
 
 from apps.core.views import frontpage,signup
 from apps.feed.views import feed,search
-from apps.oinkerprofile.views import oinkerprofile,follow_oinker,unfollow_oinker,followers,follows
+from apps.oinkerprofile.views import oinkerprofile,edit_profile,follow_oinker,unfollow_oinker,followers,follows
 
 from apps.feed.api import api_add_oink
 urlpatterns = [
@@ -36,6 +38,7 @@ urlpatterns = [
     #
     path('feed/',feed,name='feed'),
     path('search/',search,name='search'),
+    path('edit_profile',edit_profile,name='edit_profile'),
     path('u/<str:username>/',oinkerprofile,name='oinkerprofile'),
     path('u/<str:username>/followers/',followers,name='followers'),
     path('u/<str:username>/follows/',follows,name='follows'),
@@ -57,4 +60,4 @@ urlpatterns = [
     #
     # Admin
     path('admin/', admin.site.urls),
-]
+] + static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
