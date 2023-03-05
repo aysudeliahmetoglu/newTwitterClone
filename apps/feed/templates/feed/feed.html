@@ -22,6 +22,25 @@
                 </div>
 
                 <div class="wrapper-oinks">
+                    <div class="oink" v-for="oink in oinks">
+                        <article class="media">
+                            <figure class="media-left">
+                                <p class="image is-64x64">
+                                        <img :src="oink.avatar">    
+                                </p>
+                            </figure>
+                            <div class="media-content">
+                                <div class="content">
+                                    <p>
+                                        <strong>[[ oink.oinker ]]</strong>
+                                        <small>[[ oink.created_at ]]</small>
+                                        <br>
+                                        [[ oink.body ]]
+                                    </p>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
                     {% for oink in oinks %}
                         <div class="oink">
                             <article class="media">
@@ -39,17 +58,17 @@
                                             <small>{{ oink.created_at|naturaltime }}</small>
                                             <br>
                                             {{ oink.body }}
+                                            <br>
+                                            <a @click="likeOink{{ oink.id }}" v-if="!liked_oinks.includes({{ oink.id }})">Like</a>
+                                            <span v-if="liked_oinks.includes({{ oink.id }})">Liked</span>
+                                            <small id="likes-{{ oink.id }}">{{ oink.likes.count }} likes</small>
                                         </p>
                                     </div>
                                 </div>
                             </article>
                         </div>
                     {% endfor %}    
-                    <div class="oink" v-for="oink in oinks">
-                        <p class="name">[[ oink.oinker ]]</p>
-                        <p>[[ oink.body ]]</p>
-                        <p class="info">[[ oink.created_at ]]</p>
-                    </div>
+                    
                 </div>
             </div>
         </div>
@@ -67,10 +86,41 @@
                 oinks: [],
                 body: '',
                 oinker: '{{ reuqest.user.username }}',
-                created_at : 'Now'
+                created_at : 'Now',
+                avatar:'{% if request.user.oinkerprofile.avatar %}{{ request.user.oinkerprofile.avatar.url }}{% endif %}',
+                liked_oinks : [{% for oink in oinks %}{% if oink.liked %}{{ oink.id }},{% endif %}{% endfor %}]
             }
         },
         methods:{
+            likeOink(){
+                this.liked_oinks.push(parseInt(oink_id));
+
+                var oink ={
+                    'oink_id':oink_id
+                };
+
+                fetch('/api/add_like/',{
+                    method:'POST',
+                    headers: {
+                            'Content-Type':'application/json',
+                            'X-CSRFToken':'{{ csrf_token }}'
+                        },
+                        credentials: 'same-origin',
+                        body:JSON.stringify(oink)
+
+                })
+                .then((response) => {
+                    console.log(response);
+                })
+                .catch((error) => {
+                    console.log(error);
+
+                });
+
+                const el = document.getElementById('likes-'+ oink_id);
+
+
+            },
             submitOink(){
                 console.log('submitOink');
 
@@ -78,7 +128,8 @@
                     var oink = {
                         'body':this.body,
                         'oinker':this.oinker,
-                        'created_at': this.created_at
+                        'created_at': this.created_at,
+                        'avatar':this.avatar
 
                     };
                     this.oinks.unshift(oink);
