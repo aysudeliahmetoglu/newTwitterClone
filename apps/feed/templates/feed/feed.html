@@ -24,9 +24,25 @@
                 <div class="wrapper-oinks">
                     {% for oink in oinks %}
                         <div class="oink">
-                            <p class="name">{{ oink.created_by.username }}</p>
-                            <p>{{ oink.body }}</p>
-                            <p class="info">{{ oink.created_at|naturaltime }}</p>
+                            <article class="media">
+                                <figure class="media-left">
+                                    <p class="image is-64x64">
+                                        {% if oink.created_by.oinkerprofile.avatar %}
+                                            <img src="{{ oink.created_by.oinkerprofile.avatar.url }}">  
+                                        {% endif %}   
+                                    </p>
+                                </figure>
+                                <div class="media-content">
+                                    <div class="content">
+                                        <p>
+                                            <strong>{{ oink.created_by.username }}</strong>
+                                            <small>{{ oink.created_at|naturaltime }}</small>
+                                            <br>
+                                            {{ oink.body }}
+                                        </p>
+                                    </div>
+                                </div>
+                            </article>
                         </div>
                     {% endfor %}    
                     <div class="oink" v-for="oink in oinks">

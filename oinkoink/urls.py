@@ -38,7 +38,7 @@ urlpatterns = [
     #
     path('feed/',feed,name='feed'),
     path('search/',search,name='search'),
-    path('edit_profile',edit_profile,name='edit_profile'),
+    path('edit_profile/',edit_profile,name='edit_profile'),
     path('u/<str:username>/',oinkerprofile,name='oinkerprofile'),
     path('u/<str:username>/followers/',followers,name='followers'),
     path('u/<str:username>/follows/',follows,name='follows'),
