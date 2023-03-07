@@ -11,6 +11,15 @@ def feed(request):
         userids.append(oinker.user.id)
 
     oinks = Oink.objects.filter(created_by_id__in=userids)  
+
+    for oink in oinks:
+        likes = oink.likes.filter(created_by_id=request.user.id)
+
+        if likes.count() > 0:
+            oink.liked = True
+        else:
+            oink.liked = False    
+
     return render(request,'feed/feed.html', {'oinks':oinks})
 
 

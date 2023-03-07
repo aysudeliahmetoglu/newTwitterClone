@@ -59,7 +59,7 @@
                                             <br>
                                             {{ oink.body }}
                                             <br>
-                                            <a @click="likeOink{{ oink.id }}" v-if="!liked_oinks.includes({{ oink.id }})">Like</a>
+                                            <a @click="likeOink({{ oink.id }})" v-if="!liked_oinks.includes({{ oink.id }})">Like</a>
                                             <span v-if="liked_oinks.includes({{ oink.id }})">Liked</span>
                                             <small id="likes-{{ oink.id }}">{{ oink.likes.count }} likes</small>
                                         </p>
@@ -91,8 +91,9 @@
                 liked_oinks : [{% for oink in oinks %}{% if oink.liked %}{{ oink.id }},{% endif %}{% endfor %}]
             }
         },
-        methods:{
-            likeOink(){
+
+        methods: {
+            likeOink(oink_id){
                 this.liked_oinks.push(parseInt(oink_id));
 
                 var oink ={
@@ -117,11 +118,11 @@
 
                 });
 
-                const el = document.getElementById('likes-'+ oink_id);
-
-
+                const el = document.getElementById('likes-' + oink_id);
+                const likes = parseInt(el.innerHTML.split(' ')[0] + 1);
+                el.innerHTML = likes + 'likes';
             },
-            submitOink(){
+            submitOink() {
                 console.log('submitOink');
 
                 if (this.body.length > 0){
@@ -151,14 +152,14 @@
                     .catch((error) => {
                         console.log(error);
 
-                    })
+                    });
+                    
 
                 }
                 this.body = '';
             }
         }
-    }
-    )
+    })
 </script>
 
 {% endblock %}
