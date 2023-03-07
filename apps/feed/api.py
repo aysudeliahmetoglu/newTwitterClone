@@ -19,7 +19,7 @@ def api_add_like(request):
     data = json.loads(request.body)
     oink_id = data['oink_id']
 
-    if not Like.objects.filter(oink_id=oink_id).filter(created_by=request.user).exist():
+    if not Like.objects.filter(oink_id=oink_id).filter(created_by=request.user).exists():
         like = Like.objects.create(oink_id=oink_id,created_by=request.user)
         
     return JsonResponse({'success':True})    

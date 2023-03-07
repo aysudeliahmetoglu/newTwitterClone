@@ -54,7 +54,7 @@
                                 <div class="media-content">
                                     <div class="content">
                                         <p>
-                                            <strong>{{ oink.created_by.username }}</strong>
+                                            <strong><a href="{%url 'oinkerprofile' oink.created_by.username %}">{{ oink.created_by.username }}</a></strong>
                                             <small>{{ oink.created_at|naturaltime }}</small>
                                             <br>
                                             {{ oink.body }}
