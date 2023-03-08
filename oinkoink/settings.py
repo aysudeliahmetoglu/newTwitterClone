@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.humanize',
     'django.contrib.staticfiles',
-
+    
+    'apps.conversation',
     'apps.core',
     'apps.feed',
     'apps.oinkerprofile',
