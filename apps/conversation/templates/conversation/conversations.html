@@ -1,0 +1,25 @@
+{% extends 'core/base.html' %}
+{% load humanize %}
+
+{% block content %}
+    <div class="container">
+        <div class="columns">
+            <div class="column is-12">
+                <h1 class="title">Conversations</h1> 
+
+                <div class="conversations-list"></div>
+                    {% for conversation in conversations %}
+                        <div class="conversations-list-item">
+                            {% for user in conversation.users.all %}
+                                {% if user != request.user %}
+                                    <p>{{ user.username }} - {{ conversation.modified_at|naturaltime}}</p>
+                                {% endif %}
+                            {% endfor %}    
+
+                        </div>
+                    {% empty %}
+                        <p>No conversations!</p>
+                    {% endfor %}    
+            </div>    
+        </div>
+{% endblock %}        

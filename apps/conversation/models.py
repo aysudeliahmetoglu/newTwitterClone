@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 
 
 class Conversation(models.Model):
-    users = models.ManyToManyField(User,related_name='conversation')
+    users = models.ManyToManyField(User,related_name='conversations')
     modified_at = models.DateTimeField(auto_now=True)
 
     class Meta:
@@ -19,7 +19,7 @@ class ConversationMessage(models.Model):
         ordering = ['created_at']
 
 
-    def save(self,*args,**kwargs):
+    def save(self, *args, **kwargs):
         self.conversation.save()  
 
 
