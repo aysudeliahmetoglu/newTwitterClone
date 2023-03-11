@@ -7,19 +7,22 @@
             <div class="column is-12">
                 <h1 class="title">Conversations</h1> 
 
-                <div class="conversations-list"></div>
+                <div class="conversations-list">
                     {% for conversation in conversations %}
                         <div class="conversations-list-item">
                             {% for user in conversation.users.all %}
                                 {% if user != request.user %}
-                                    <p>{{ user.username }} - {{ conversation.modified_at|naturaltime}}</p>
+                                    <a href="{% url 'conversation' user.id %}">
+                                        <p>{{ user.username }} - {{ conversation.modified_at|naturaltime}}</p>
+                                    </a>
                                 {% endif %}
                             {% endfor %}    
-
                         </div>
                     {% empty %}
                         <p>No conversations!</p>
                     {% endfor %}    
-            </div>    
+               </div>    
+            </div>
         </div>
+    </div>
 {% endblock %}        

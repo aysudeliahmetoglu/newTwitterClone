@@ -44,7 +44,7 @@
                             <div class="media-content">
                                 <div class="content">
                                     <p>
-                                        <strong>[[ message.oinker ]]</strong>{{ message.created_by.username }}<small>[[ message.created_at ]]</small>
+                                        <strong>[[ message.oinker ]]</strong><small>[[ message.created_at ]]</small>
                                         <br>
                                         [[ message.content ]]
                                     </p>
@@ -84,10 +84,45 @@
                 content : '',
                 oinker:'{{ request.user.username }}',
                 created_at:'Now',
-                avatar : '{% if request.user.oinkerprofile.avatar %}{{ request.user.oinkerprofile.avatar }}{% endif %}'
+                avatar : '{% if request.user.oinkerprofile.avatar %}{{ request.user.oinkerprofile.avatar.url }}{% endif %}'
 
             }
         },
+        methods:{
+            submitMessage(){
+                if (this.content.length > 0){
+                    var message = {
+                        'content':this.content,
+                        'oinker':this.oinker,
+                        'created_at':this.created_at,
+                        'avatar':this.avatar,
+                        'conversation_id':'{{ conversation.id }}'
+                    };
+
+                    this.message.unshift(message);
+
+                    fetch('/api/add_message/',{
+                        method:'POST',
+                        headers :{
+                            'Content-Type':'application/json',
+                            'X-CSRFToken':'{{ csrf_token }}'
+                        },
+                        credentials:'same-origin',
+                        body:JSON.stringify(message)
+                    })
+                    .then((response) => {
+                        console.log(response)
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                    }) 
+                    this.content = '';
+
+
+                }
+            }
+        }
+
 
     })
 </script>

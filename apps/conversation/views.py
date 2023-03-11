@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 
 
 
-from .models import Conversation,ConversationMessage
+from .models import Conversation, ConversationMessage
 
 
 @login_required
@@ -15,11 +15,11 @@ def conversations(request):
 
 @login_required
 def conversation(request,user_id):
-    conversations  = Conversation.object.filter(users__in=[request.user.id])
+    conversations  = Conversation.objects.filter(users__in=[request.user.id])
     conversations = conversations.filter(users__in=[user_id])
 
 
-    if conversations.count == 1:
+    if conversations.count() == 1:
         conversation = conversations[0]
     else:
         recipient = User.objects.get(pk=user_id)

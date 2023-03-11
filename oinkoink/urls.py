@@ -26,7 +26,7 @@ from apps.feed.views import feed,search
 from apps.oinkerprofile.views import oinkerprofile,edit_profile,follow_oinker,unfollow_oinker,followers,follows
 from apps.conversation.views import conversations,conversation
 
-
+from apps.conversation.api import  api_add_message
 from apps.feed.api import api_add_oink,api_add_like
 urlpatterns = [
     #
@@ -60,6 +60,8 @@ urlpatterns = [
 
     path('api/add_oink/',api_add_oink,name='api_add_oink'),
     path('api/add_like/',api_add_like,name='api_add_like'),
+    path('api/add_message/',api_add_message,name='api_add_message'),
+
 
 
 
