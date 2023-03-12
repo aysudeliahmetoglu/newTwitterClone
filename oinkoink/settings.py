@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'apps.conversation',
     'apps.core',
     'apps.feed',
+    'apps.notification',
     'apps.oinkerprofile',
     
 ]
