@@ -1,6 +1,9 @@
 from django.shortcuts import render, get_object_or_404,redirect
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
+from apps.notification.utilities import create_notification
+
+
 
 from .forms import OinkerprofileForm
 
@@ -28,6 +31,8 @@ def follow_oinker(request,username):
     user = get_object_or_404(User,username=username)
 
     request.user.oinkerprofile.follows.add(user.oinkerprofile)
+
+    create_notification(request,user,'follower')
 
     return redirect('oinkerprofile', username=username)
 

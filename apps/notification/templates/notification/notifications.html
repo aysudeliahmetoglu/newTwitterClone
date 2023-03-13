@@ -1,0 +1,30 @@
+{% extends 'core/base.html' %}
+
+{% load humanize %}
+
+{% block content %}
+    <div class="container" >
+        <div class="columns">
+            <div class="column is-12">
+                <h1 class="title">Notifications</h1>
+                {% if not notifications %}
+                    <p>You have no notifications!</p>
+                {% endif %}
+                
+                <div class="wrapper-oinks">
+                    {% for notification in notifications %}
+                    <article class="media">
+                        <figure class="media-left">
+                            <p class="image is-64x64">
+                                
+                            </p>
+                        </figure>
+
+                    </article>
+
+                </div>
+            </div>
+        </div>
+    </div>        
+
+{% endblock %}
