@@ -40,6 +40,11 @@
                                             <strong>{{ notification.created_by.username }}</strong> liked an oink you wrote<br>
                                             <small>{{ notification.created_at|naturaltime }}</small>
                                         </a>
+                                        {% elif notification.notification_type == 'mention' %}
+                                        <a href="{% url 'notifications' %}?goto=oinkerprofile&notification={{ notification.id }}">
+                                            <strong>{{ notification.created_by.username }}</strong> mentioned you in an oink<br>
+                                            <small>{{ notification.created_at|naturaltime }}</small>
+                                        </a>
                                     {% endif %}    
                                 </p>
                             </div>

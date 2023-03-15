@@ -1,7 +1,10 @@
 import json
+import re
 
 from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
+
 from apps.notification.utilities import create_notification
 
 
@@ -12,6 +15,14 @@ def api_add_oink(request):
     body = data ['body']
 
     oink = Oink.objects.create(body=body , created_by=request.user)
+
+    results = re.findall("(^|[^@\w])@(\w{1,20})",body)
+    for result in results:
+        result = result[1]
+        print(result)
+
+        if User.objects.filter(username=result).exists() and result !=request.user.username:
+            create_notification(request,User.objects.get(username=result),'mention')
 
     return JsonResponse({'success':True})
 
